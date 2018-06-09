@@ -14,7 +14,7 @@
   debounceDuration: how long of an interval to ignore rapid changes in state due to the mechanical switch of the anemometer. Defaults to 10 milliseconds.
 */
 
-Anemometer::Anemometer(int pin, int distancePerPulse = 1, int interval = 3000, unsigned long debounceDuration = 10) {
+Anemometer::Anemometer(int pin, int distancePerPulse, int interval, unsigned long debounceDuration) {
   _pin = pin;
   _distancePerPulse = distancePerPulse;
   _interval = interval;
@@ -115,6 +115,6 @@ void Anemometer::setInterval(int interval) {
 
 
 
-void setDistancePerPulse(int distance) {
+void Anemometer::setDistancePerPulse(int distance) {
   _distancePerPulse = distance;
 };
