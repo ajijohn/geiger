@@ -21,6 +21,8 @@ Anemometer::Anemometer(int pin, int distancePerPulse, int interval, unsigned lon
   _debounceDuration = debounceDuration;
   _prevState = HIGH;
   _intervalTime = 0;
+  _debugMode = false;
+  _lastDebounceTime = 0;
 }
 
 
@@ -49,22 +51,42 @@ void Anemometer::setup() {
 void Anemometer::update() {
   int currentState = digitalRead(_pin);
 
-  if (currentState != _prevState) {
-    _lastDebounceTime = millis();
-  }
+  // if ((millis() - _lastDebounceTime) > _debounceDuration) {
+  //   if (currentState != _prevState && currentState == LOW) {
+  //     _pulses++;
 
-  if ((millis() - _lastDebounceTime) > _debounceDuration) {
-    if (currentState != _prevState && currentState == LOW) {
-      _pulses++;
+  //     if (_debugMode == true) {
+  //       Serial.print(F("New pulse came in from anemometer connected to pin "));
+  //       Serial.print(_pin);
+  //       Serial.print(F(". Number of pulses currently: "));
+  //       Serial.println(_pulses);
+  //     }
+  //   }
+  // }
+
+  if (currentState == LOW && (millis() - _lastDebounceTime) > _debounceDuration) {
+    _lastDebounceTime = millis();
+    _pulses++;
+
+    if (_debugMode == true) {
+      Serial.print(F("New pulse came in from anemometer connected to pin "));
+      Serial.print(_pin);
+      Serial.print(F(". Number of pulses currently: "));
+      Serial.println(_pulses);
     }
   }
-
-  _prevState = currentState;
 
   if (millis() - _intervalTime > _interval) {
     _intervalTime = millis();
     _lastRecordedPulses = _pulses;
     _pulses = 0;
+
+    if (_debugMode == true) {
+      Serial.print(F("Pulse count reset for anemometer connected to pin "));
+      Serial.print(_pin);
+      Serial.print(F(". Last recorded pulse count reads as: "));
+      Serial.println(_lastRecordedPulses);
+    }
   }
 }
 
@@ -84,7 +106,7 @@ void Anemometer::update() {
 */
 
 float Anemometer::getWindSpeedKMPH() {
-  return (_lastRecordedPulses * _distancePerPulse) / _interval * 3600;
+  return (float(_lastRecordedPulses) * float(_distancePerPulse)) / float(_interval) * 3600.0;
 }
 
 
@@ -97,7 +119,7 @@ float Anemometer::getWindSpeedKMPH() {
 */
 
 float Anemometer::getWindSpeedMPH() {
-  return (_lastRecordedPulses * _distancePerPulse) / (_interval / 1000) * 3600 / 1609.34;
+  return (float(_lastRecordedPulses) * float(_distancePerPulse)) / (float(_interval) / 1000.0) * 3600.0 / 1609.34;
 }
 
 
@@ -118,3 +140,12 @@ void Anemometer::setInterval(int interval) {
 void Anemometer::setDistancePerPulse(int distance) {
   _distancePerPulse = distance;
 };
+
+
+
+
+
+
+void Anemometer::setDebugMode(bool isInDebugMode) {
+  _debugMode = isInDebugMode;
+}
