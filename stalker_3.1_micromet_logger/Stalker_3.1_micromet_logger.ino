@@ -6,9 +6,9 @@
 #include <DallasTemperature.h>
 
 #include <SPI.h>
-#include <SparkFunDS3234RTC.h> // <TODO: insert link for Sparkfun DS3234 RTC library>
+#include <SparkFunDS3234RTC.h> // Get library from: https://github.com/sparkfun/SparkFun_DS3234_RTC_Arduino_Library
 #include <SD.h>
-#include "SeeeduinoStalker.h"
+#include "SeeeduinoStalker.h" // Get library from: https://github.com/Seeed-Studio/Sketch_Stalker_V3_1
 
 // Stalker data structure for reading battery voltage
 Stalker stalker;
