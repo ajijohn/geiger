@@ -161,7 +161,7 @@ void setup() {
   anemometer4.setInterval(180000);
   anemometer4.setDebugMode(true);
 
-  Serial.println(F("Micro-met Test"));
+  Serial.println(F("Micro-met Production"));
 }
 
 void loop() {
