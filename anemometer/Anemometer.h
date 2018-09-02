@@ -14,7 +14,7 @@ class Anemometer {
     int _pin;
     int _distancePerPulse;
     int _pulses;
-    int _interval;
+    long _interval;
     int _lastRecordedPulses;
     unsigned long _intervalTime;
     unsigned long _debounceDuration;
@@ -22,12 +22,12 @@ class Anemometer {
     int _prevState;
     bool _debugMode;
   public:
-    Anemometer(int pin, int distancePerPulse = 1, int interval = 3000, unsigned long debounceDuration = 10);
+    Anemometer(int pin, int distancePerPulse = 1, long interval = 3000, unsigned long debounceDuration = 10);
     void setup();
     void update();
     float getWindSpeedMPH();
     float getWindSpeedKMPH();
-    void setInterval(int interval);
+    void setInterval(long interval);
     void setDistancePerPulse(int distance);
     void setDebugMode(bool isInDebugMode);
 };
