@@ -35,7 +35,7 @@ OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 
 // arrays to hold device addresses
-DeviceAddress therm1, therm2, therm3, therm4, therm5, therm6, therm7;
+DeviceAddress therm1, therm2, therm3, therm4;
 
 // Assign address manually. The addresses below will beed to be changed
 // to valid device addresses on your bus. Device address can be retrieved
@@ -48,9 +48,9 @@ char therm1Address[17] = {};
 char therm2Address[17] = {};
 char therm3Address[17] = {};
 char therm4Address[17] = {};
-char therm5Address[17] = {};
-char therm6Address[17] = {};
-char therm7Address[17] = {};
+//char therm5Address[17] = {};
+//char therm6Address[17] = {};
+//char therm7Address[17] = {};
 
 void setup(void)
 {
@@ -113,9 +113,9 @@ void setup(void)
   if (!sensors.getAddress(therm2, 1)) Serial.println(F("Unable to find address for therm2"));
   if (!sensors.getAddress(therm3, 2)) Serial.println(F("Unable to find address for therm3"));
   if (!sensors.getAddress(therm4, 3)) Serial.println(F("Unable to find address for therm4"));
-  if (!sensors.getAddress(therm5, 4)) Serial.println(F("Unable to find address for therm5"));
-  if (!sensors.getAddress(therm6, 5)) Serial.println(F("Unable to find address for therm6"));
-  if (!sensors.getAddress(therm7, 6)) Serial.println(F("Unable to find address for therm7"));
+//  if (!sensors.getAddress(therm5, 4)) Serial.println(F("Unable to find address for therm5"));
+//  if (!sensors.getAddress(therm6, 5)) Serial.println(F("Unable to find address for therm6"));
+//  if (!sensors.getAddress(therm7, 6)) Serial.println(F("Unable to find address for therm7"));
 
   // method 2: search()
   // search() looks for the next device. Returns 1 if a new address has been
@@ -135,9 +135,9 @@ void setup(void)
   sprintf(therm2Address, "%02X%02X%02X%02X%02X%02X%02X%02X", therm2[0],therm2[1],therm2[2],therm2[3],therm2[4],therm2[5],therm2[6],therm2[7]);
   sprintf(therm3Address, "%02X%02X%02X%02X%02X%02X%02X%02X", therm3[0],therm3[1],therm3[2],therm3[3],therm3[4],therm3[5],therm3[6],therm3[7]);
   sprintf(therm4Address, "%02X%02X%02X%02X%02X%02X%02X%02X", therm4[0],therm4[1],therm4[2],therm4[3],therm4[4],therm4[5],therm4[6],therm4[7]);
-  sprintf(therm5Address, "%02X%02X%02X%02X%02X%02X%02X%02X", therm5[0],therm5[1],therm5[2],therm5[3],therm5[4],therm5[5],therm5[6],therm5[7]);
-  sprintf(therm6Address, "%02X%02X%02X%02X%02X%02X%02X%02X", therm6[0],therm6[1],therm6[2],therm6[3],therm6[4],therm6[5],therm6[6],therm6[7]);
-  sprintf(therm7Address, "%02X%02X%02X%02X%02X%02X%02X%02X", therm7[0],therm7[1],therm7[2],therm7[3],therm7[4],therm7[5],therm7[6],therm7[7]);
+//  sprintf(therm5Address, "%02X%02X%02X%02X%02X%02X%02X%02X", therm5[0],therm5[1],therm5[2],therm5[3],therm5[4],therm5[5],therm5[6],therm5[7]);
+//  sprintf(therm6Address, "%02X%02X%02X%02X%02X%02X%02X%02X", therm6[0],therm6[1],therm6[2],therm6[3],therm6[4],therm6[5],therm6[6],therm6[7]);
+//  sprintf(therm7Address, "%02X%02X%02X%02X%02X%02X%02X%02X", therm7[0],therm7[1],therm7[2],therm7[3],therm7[4],therm7[5],therm7[6],therm7[7]);
 
   // show the addresses we found on the bus
   Serial.print(F("therm1 Address: "));
@@ -156,17 +156,17 @@ void setup(void)
   printAddress(therm4);
   Serial.println();
 
-  Serial.print(F("therm5 Address: "));
-  printAddress(therm5);
-  Serial.println();
-
-  Serial.print(F("therm6 Address: "));
-  printAddress(therm6);
-  Serial.println();
-
-  Serial.print(F("therm7 Address: "));
-  printAddress(therm7);
-  Serial.println();
+//  Serial.print(F("therm5 Address: "));
+//  printAddress(therm5);
+//  Serial.println();
+//
+//  Serial.print(F("therm6 Address: "));
+//  printAddress(therm6);
+//  Serial.println();
+//
+//  Serial.print(F("therm7 Address: "));
+//  printAddress(therm7);
+//  Serial.println();
 
   DateTime now = RTC.now(); //get the current date-time
 
@@ -195,15 +195,15 @@ void setup(void)
     addressDataFile.print("therm4");
     addressDataFile.print(",");
     addressDataFile.println(therm4Address);
-    addressDataFile.print("therm5");
-    addressDataFile.print(",");
-    addressDataFile.println(therm5Address);
-    addressDataFile.print("therm6");
-    addressDataFile.print(",");
-    addressDataFile.println(therm6Address);
-    addressDataFile.print("therm7");
-    addressDataFile.print(",");
-    addressDataFile.println(therm7Address);
+//    addressDataFile.print("therm5");
+//    addressDataFile.print(",");
+//    addressDataFile.println(therm5Address);
+//    addressDataFile.print("therm6");
+//    addressDataFile.print(",");
+//    addressDataFile.println(therm6Address);
+//    addressDataFile.print("therm7");
+//    addressDataFile.print(",");
+//    addressDataFile.println(therm7Address);
     addressDataFile.close();
     Serial.println(F("Thermistor addresses recorded."));
   }
@@ -363,17 +363,17 @@ void loop(void)
   printData(therm2);
   printData(therm3);
   printData(therm4);
-  printData(therm5);
-  printData(therm6);
-  printData(therm7);
+//  printData(therm5);
+//  printData(therm6);
+//  printData(therm7);
 
   writeDataToCard(therm1);
   writeDataToCard(therm2);
   writeDataToCard(therm3);
   writeDataToCard(therm4);
-  writeDataToCard(therm5);
-  writeDataToCard(therm6);
-  writeDataToCard(therm7);
+//  writeDataToCard(therm5);
+//  writeDataToCard(therm6);
+//  writeDataToCard(therm7);
 
   digitalWrite(4, LOW);
 
